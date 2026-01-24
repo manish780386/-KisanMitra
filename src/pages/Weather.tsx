@@ -12,6 +12,7 @@ import {
   FaCloudRain,
   FaCloudSun,
 } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 const API_KEY = "6839755239889a7df964a3b96da2e237";
 
@@ -39,10 +40,72 @@ interface WeatherData {
 }
 
 const Weather: React.FC = () => {
-  const [city, setCity] = useState<string>(localStorage.getItem("city") || "Indore");
+  const { lang } = useLanguage(); // ✅ LANGUAGE
+  const [city, setCity] = useState<string>(
+    localStorage.getItem("city") || "Indore"
+  );
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const text = {
+    en: {
+      title: "Weather Forecast",
+      subtitle: "Check live weather and rain forecast for any city in India",
+      placeholder: "Enter city name (e.g. Bhopal)",
+      search: "Search",
+      loading: "Loading weather...",
+      error: "City not found ❌",
+      rain: "Likely to Rain",
+      norain: "No Rain Expected",
+      min: "Min",
+      max: "Max",
+      humidity: "Humidity",
+      wind: "Wind",
+      pressure: "Pressure",
+      sunrise: "Sunrise",
+      sunset: "Sunset",
+      visibility: "Visibility",
+    },
+    hi: {
+      title: "मौसम पूर्वानुमान",
+      subtitle: "भारत के किसी भी शहर का लाइव मौसम देखें",
+      placeholder: "शहर का नाम लिखें (जैसे भोपाल)",
+      search: "खोजें",
+      loading: "मौसम लोड हो रहा है...",
+      error: "शहर नहीं मिला ❌",
+      rain: "बारिश की संभावना",
+      norain: "बारिश की संभावना नहीं",
+      min: "न्यूनतम",
+      max: "अधिकतम",
+      humidity: "नमी",
+      wind: "हवा",
+      pressure: "दबाव",
+      sunrise: "सूर्योदय",
+      sunset: "सूर्यास्त",
+      visibility: "दृश्यता",
+    },
+    mr: {
+      title: "हवामान अंदाज",
+      subtitle: "भारतामधील कोणत्याही शहराचे हवामान पहा",
+      placeholder: "शहराचे नाव टाका (उदा. भोपाळ)",
+      search: "शोधा",
+      loading: "हवामान लोड होत आहे...",
+      error: "शहर सापडले नाही ❌",
+      rain: "पावसाची शक्यता",
+      norain: "पावसाची शक्यता नाही",
+      min: "किमान",
+      max: "कमाल",
+      humidity: "आर्द्रता",
+      wind: "वारा",
+      pressure: "दाब",
+      sunrise: "सूर्योदय",
+      sunset: "सूर्यास्त",
+      visibility: "दृश्यता",
+    },
+  };
+
+  const t = text[lang];
 
   const fetchWeather = async (cityName: string) => {
     try {
@@ -62,8 +125,8 @@ const Weather: React.FC = () => {
 
       setWeather(res.data);
       localStorage.setItem("city", cityName);
-    } catch (err) {
-      setError("City not found ❌");
+    } catch {
+      setError(t.error);
       setWeather(null);
     } finally {
       setLoading(false);
@@ -74,118 +137,80 @@ const Weather: React.FC = () => {
     fetchWeather(city);
   }, []);
 
-  const willRain = (): string | null => {
-    if (!weather) return null;
-    const description = weather.weather[0].main.toLowerCase();
-    return description.includes("rain") ? "🌧️ Likely to Rain" : "☀️ No Rain Expected";
-  };
+  const willRain = () =>
+    weather?.weather[0].main.toLowerCase().includes("rain")
+      ? `🌧️ ${t.rain}`
+      : `☀️ ${t.norain}`;
 
   return (
     <div className="min-h-screen bg-green-50 p-6">
       <div className="max-w-4xl mx-auto">
 
-        {/* HEADER */}
         <h1 className="text-4xl font-bold text-green-700 text-center">
-          Weather Forecast 🌦️
+          {t.title} 🌦️
         </h1>
-        <p className="text-center text-gray-600 mt-2">
-          Check live weather and rain forecast for any city in India
-        </p>
+        <p className="text-center text-gray-600 mt-2">{t.subtitle}</p>
 
-        {/* SEARCH */}
         <div className="mt-8 flex gap-3 justify-center">
           <input
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            placeholder="Enter city name (e.g. Bhopal)"
+            placeholder={t.placeholder}
             className="border p-3 rounded w-64"
           />
           <button
             onClick={() => fetchWeather(city)}
             className="bg-green-700 text-white px-6 rounded hover:bg-green-800"
           >
-            Search
+            {t.search}
           </button>
         </div>
 
-        {/* QUICK BUTTONS */}
-        <div className="flex gap-4 justify-center mt-4">
-          <button
-            onClick={() => { setCity("Indore"); fetchWeather("Indore"); }}
-            className="px-4 py-2 bg-white border rounded hover:bg-green-100"
-          >
-            Indore
-          </button>
-          <button
-            onClick={() => { setCity("Bhopal"); fetchWeather("Bhopal"); }}
-            className="px-4 py-2 bg-white border rounded hover:bg-green-100"
-          >
-            Bhopal
-          </button>
-        </div>
+        {loading && (
+          <p className="text-center mt-6 text-gray-600">{t.loading}</p>
+        )}
+        {error && (
+          <p className="text-center mt-6 text-red-600 font-semibold">{error}</p>
+        )}
 
-        {/* LOADING */}
-        {loading && <p className="text-center mt-6 text-gray-600">Loading weather...</p>}
-
-        {/* ERROR */}
-        {error && <p className="text-center mt-6 text-red-600 font-semibold">{error}</p>}
-
-        {/* WEATHER CARD */}
         {weather && (
           <div className="mt-10 bg-white rounded-xl shadow p-8 text-center">
-            <h2 className="text-2xl font-bold text-green-700">{weather.name}</h2>
+            <h2 className="text-2xl font-bold text-green-700">
+              {weather.name}
+            </h2>
 
             <p className="text-5xl font-bold mt-4 flex items-center justify-center gap-2">
               <FaCloudSun /> {weather.main.temp}°C
             </p>
 
-            <p className="capitalize text-gray-600 mt-2 flex items-center justify-center gap-2">
-              <FaCloudRain /> {weather.weather[0].description}
-            </p>
-            <p className="mt-2 font-semibold flex items-center justify-center gap-2">
-              {weather.weather[0].main.toLowerCase().includes("rain") ? <FaTint /> : <FaSun />} {willRain()}
-            </p>
+            <p className="mt-2 font-semibold">{willRain()}</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaTemperatureLow className="text-green-700 text-2xl" />
-                <p className="mt-2">Min</p>
-                <p className="font-bold">{weather.main.temp_min}°C</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaTemperatureLow /> {t.min}: {weather.main.temp_min}°C
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaTemperatureHigh className="text-green-700 text-2xl" />
-                <p className="mt-2">Max</p>
-                <p className="font-bold">{weather.main.temp_max}°C</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaTemperatureHigh /> {t.max}: {weather.main.temp_max}°C
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaTint className="text-green-700 text-2xl" />
-                <p className="mt-2">Humidity</p>
-                <p className="font-bold">{weather.main.humidity}%</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaTint /> {t.humidity}: {weather.main.humidity}%
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaWind className="text-green-700 text-2xl" />
-                <p className="mt-2">Wind</p>
-                <p className="font-bold">{weather.wind.speed} km/h</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaWind /> {t.wind}: {weather.wind.speed} km/h
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaTachometerAlt className="text-green-700 text-2xl" />
-                <p className="mt-2">Pressure</p>
-                <p className="font-bold">{weather.main.pressure} hPa</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaTachometerAlt /> {t.pressure}: {weather.main.pressure}
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaSun className="text-green-700 text-2xl" />
-                <p className="mt-2">Sunrise</p>
-                <p className="font-bold">{new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaSun /> {t.sunrise}:{" "}
+                {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaMoon className="text-green-700 text-2xl" />
-                <p className="mt-2">Sunset</p>
-                <p className="font-bold">{new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaMoon /> {t.sunset}:{" "}
+                {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
               </div>
-              <div className="bg-green-50 p-4 rounded flex flex-col items-center">
-                <FaEye className="text-green-700 text-2xl" />
-                <p className="mt-2">Visibility</p>
-                <p className="font-bold">{weather.visibility / 1000} km</p>
+              <div className="bg-green-50 p-4 rounded">
+                <FaEye /> {t.visibility}: {weather.visibility / 1000} km
               </div>
             </div>
           </div>

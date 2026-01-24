@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { FaChartLine, FaExclamationTriangle, FaBug } from "react-icons/fa";
+import {
+  FaChartLine,
+  FaExclamationTriangle,
+  FaBug,
+} from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 interface Disease {
   name: string;
@@ -38,9 +43,8 @@ const cropsData: Record<string, Crop> = {
     ],
     pests: [
       { name: "Aphids", remedy: "Introduce ladybugs or use insecticidal soap" },
-      { name: "Armyworm", remedy: "Manual removal or neem spray" },
     ],
-    marketTips: "Best selling period: April, current mandi price approx ₹2200/quintal",
+    marketTips: "Best selling period: April, mandi price ~ ₹2200/quintal",
   },
   rice: {
     name: "Rice",
@@ -50,73 +54,79 @@ const cropsData: Record<string, Crop> = {
     irrigation: "Every 5-7 days",
     sunlight: "5-7 hours/day",
     diseases: [
-      { name: "Blast Disease", severity: "high", remedy: "Use resistant varieties and proper spacing" },
+      { name: "Blast Disease", severity: "high", remedy: "Use resistant varieties" },
     ],
     pests: [
-      { name: "Brown Plant Hopper", remedy: "Apply neem-based pesticides" },
+      { name: "Brown Plant Hopper", remedy: "Neem-based pesticide" },
     ],
-    marketTips: "Best selling period: Nov, current mandi price approx ₹2500/quintal",
-  },
-  maize: {
-    name: "Maize",
-    season: "Kharif",
-    sowing: "Jun - Jul",
-    harvest: "Sep - Oct",
-    irrigation: "Every 7 days",
-    sunlight: "6-8 hours/day",
-    diseases: [
-      { name: "Downy Mildew", severity: "medium", remedy: "Use resistant seeds & proper spacing" },
-    ],
-    pests: [
-      { name: "Stem Borer", remedy: "Use pheromone traps and biopesticides" },
-    ],
-    marketTips: "Best selling period: Oct, current mandi price approx ₹1800/quintal",
-  },
-  soybean: {
-    name: "Soybean",
-    season: "Kharif",
-    sowing: "Jun - Jul",
-    harvest: "Sep - Oct",
-    irrigation: "Every 6-7 days",
-    sunlight: "5-7 hours/day",
-    diseases: [
-      { name: "Charcoal Rot", severity: "medium", remedy: "Avoid water stress, crop rotation" },
-    ],
-    pests: [
-      { name: "Pod Borer", remedy: "Use pheromone traps and neem-based sprays" },
-    ],
-    marketTips: "Best selling period: Oct-Nov, current mandi price approx ₹3500/quintal",
-  },
-  mustard: {
-    name: "Mustard",
-    season: "Rabi",
-    sowing: "Oct - Nov",
-    harvest: "Feb - Mar",
-    irrigation: "Every 10 days",
-    sunlight: "6 hours/day",
-    diseases: [
-      { name: "White Rust", severity: "medium", remedy: "Spray fungicide and remove affected leaves" },
-    ],
-    pests: [
-      { name: "Aphids", remedy: "Neem oil spray or ladybugs" },
-    ],
-    marketTips: "Best selling period: Mar-Apr, current mandi price approx ₹4000/quintal",
+    marketTips: "Best selling period: Nov, mandi price ~ ₹2500/quintal",
   },
 };
 
 const CropAdvisory: React.FC = () => {
-  const [selectedCrop, setSelectedCrop] = useState<string>("wheat");
+  const { lang } = useLanguage();
+  const [selectedCrop, setSelectedCrop] = useState("wheat");
   const crop = cropsData[selectedCrop];
+
+  const text = {
+    en: {
+      title: "Crop Advisory",
+      subtitle:
+        "Select your crop to get guidance on farming, diseases, pests, irrigation & market tips.",
+      seasonal: "Seasonal Tips",
+      sowing: "Sowing Period",
+      harvest: "Harvest Period",
+      irrigation: "Irrigation",
+      sunlight: "Sunlight",
+      market: "Market Tips",
+      disease: "Disease Alerts",
+      pest: "Pest Guidance",
+      severity: "Severity",
+      remedy: "Remedy",
+    },
+    hi: {
+      title: "फसल सलाह",
+      subtitle:
+        "खेती, रोग, कीट, सिंचाई और बाजार जानकारी के लिए फसल चुनें।",
+      seasonal: "मौसमी जानकारी",
+      sowing: "बुवाई समय",
+      harvest: "कटाई समय",
+      irrigation: "सिंचाई",
+      sunlight: "धूप",
+      market: "बाजार सलाह",
+      disease: "रोग चेतावनी",
+      pest: "कीट नियंत्रण",
+      severity: "गंभीरता",
+      remedy: "उपाय",
+    },
+    mr: {
+      title: "पीक सल्ला",
+      subtitle:
+        "शेती, रोग, कीड, सिंचन आणि बाजार माहितीसाठी पीक निवडा.",
+      seasonal: "हंगामी माहिती",
+      sowing: "पेरणी कालावधी",
+      harvest: "कापणी कालावधी",
+      irrigation: "सिंचन",
+      sunlight: "सूर्यप्रकाश",
+      market: "बाजार सल्ला",
+      disease: "रोग सूचना",
+      pest: "कीड नियंत्रण",
+      severity: "तीव्रता",
+      remedy: "उपाय",
+    },
+  };
+
+  const t = text[lang];
 
   return (
     <div className="min-h-screen bg-green-50 p-6">
       <div className="max-w-6xl mx-auto">
 
         <h1 className="text-4xl font-bold text-green-700 text-center">
-          Crop Advisory 🌱
+          {t.title} 🌱
         </h1>
         <p className="text-center text-gray-600 mt-2">
-          Select your crop to get guidance on farming, diseases, pests, irrigation & market tips.
+          {t.subtitle}
         </p>
 
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
@@ -136,21 +146,21 @@ const CropAdvisory: React.FC = () => {
         </div>
 
         <div className="mt-8 grid md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <div className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-2xl font-bold text-green-700 mb-4">
-              🌾 {crop.name} - Seasonal Tips
+              🌾 {crop.name} - {t.seasonal}
             </h2>
             <ul className="space-y-2 text-gray-700">
-              <li>🌱 Sowing Period: {crop.sowing}</li>
-              <li>🌿 Harvest Period: {crop.harvest}</li>
-              <li>💧 Irrigation: {crop.irrigation}</li>
-              <li>🌞 Sunlight: {crop.sunlight}</li>
+              <li>🌱 {t.sowing}: {crop.sowing}</li>
+              <li>🌿 {t.harvest}: {crop.harvest}</li>
+              <li>💧 {t.irrigation}: {crop.irrigation}</li>
+              <li>🌞 {t.sunlight}: {crop.sunlight}</li>
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <div className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-2xl font-bold text-green-700 mb-4">
-              <FaChartLine className="inline mr-2" /> Market Tips
+              <FaChartLine className="inline mr-2" /> {t.market}
             </h2>
             <p className="text-gray-700">{crop.marketTips}</p>
           </div>
@@ -158,14 +168,16 @@ const CropAdvisory: React.FC = () => {
 
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-green-700 mb-4">
-            <FaExclamationTriangle className="inline mr-2" /> Disease Alerts
+            <FaExclamationTriangle className="inline mr-2" /> {t.disease}
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
-            {crop.diseases.map((disease, i) => (
-              <div key={i} className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-                <p className="font-semibold">{disease.name}</p>
-                <p>Severity: {disease.severity}</p>
-                <p className="text-gray-600">Remedy: {disease.remedy}</p>
+            {crop.diseases.map((d, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl shadow">
+                <p className="font-semibold">{d.name}</p>
+                <p>{t.severity}: {d.severity}</p>
+                <p className="text-gray-600">
+                  {t.remedy}: {d.remedy}
+                </p>
               </div>
             ))}
           </div>
@@ -173,13 +185,15 @@ const CropAdvisory: React.FC = () => {
 
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-green-700 mb-4">
-            <FaBug className="inline mr-2" /> Pest Guidance
+            <FaBug className="inline mr-2" /> {t.pest}
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
-            {crop.pests.map((pest, i) => (
-              <div key={i} className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-                <p className="font-semibold">{pest.name}</p>
-                <p className="text-gray-600">Remedy: {pest.remedy}</p>
+            {crop.pests.map((p, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl shadow">
+                <p className="font-semibold">{p.name}</p>
+                <p className="text-gray-600">
+                  {t.remedy}: {p.remedy}
+                </p>
               </div>
             ))}
           </div>
