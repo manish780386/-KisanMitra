@@ -1,15 +1,6 @@
 import { useState } from "react";
-import {
-  FaSeedling,
-  FaLeaf,
-  FaTint,
-  FaSun,
-  FaExclamationTriangle,
-  FaBug,
-  FaChartLine,
-} from "react-icons/fa";
+import { FaChartLine, FaExclamationTriangle, FaBug } from "react-icons/fa";
 
-// Crop, Disease, and Pest Types
 interface Disease {
   name: string;
   severity: "low" | "medium" | "high";
@@ -33,7 +24,6 @@ interface Crop {
   marketTips: string;
 }
 
-// Crops Data
 const cropsData: Record<string, Crop> = {
   wheat: {
     name: "Wheat",
@@ -122,15 +112,13 @@ const CropAdvisory: React.FC = () => {
     <div className="min-h-screen bg-green-50 p-6">
       <div className="max-w-6xl mx-auto">
 
-        {/* HEADER */}
         <h1 className="text-4xl font-bold text-green-700 text-center">
           Crop Advisory 🌱
         </h1>
         <p className="text-center text-gray-600 mt-2">
-          Select your crop to get complete guidance on farming, diseases, pests, irrigation & market tips.
+          Select your crop to get guidance on farming, diseases, pests, irrigation & market tips.
         </p>
 
-        {/* Crop Selector */}
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
           {Object.keys(cropsData).map((key) => (
             <button
@@ -147,9 +135,7 @@ const CropAdvisory: React.FC = () => {
           ))}
         </div>
 
-        {/* Crop Info */}
         <div className="mt-8 grid md:grid-cols-2 gap-6">
-          {/* Seasonal Info */}
           <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
             <h2 className="text-2xl font-bold text-green-700 mb-4">
               🌾 {crop.name} - Seasonal Tips
@@ -162,7 +148,6 @@ const CropAdvisory: React.FC = () => {
             </ul>
           </div>
 
-          {/* Market Info */}
           <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
             <h2 className="text-2xl font-bold text-green-700 mb-4">
               <FaChartLine className="inline mr-2" /> Market Tips
@@ -171,7 +156,6 @@ const CropAdvisory: React.FC = () => {
           </div>
         </div>
 
-        {/* Disease Alerts */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-green-700 mb-4">
             <FaExclamationTriangle className="inline mr-2" /> Disease Alerts
@@ -187,7 +171,6 @@ const CropAdvisory: React.FC = () => {
           </div>
         </div>
 
-        {/* Pest Alerts */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-green-700 mb-4">
             <FaBug className="inline mr-2" /> Pest Guidance

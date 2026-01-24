@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaHome, FaTachometerAlt, FaInfoCircle, FaPhone } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  const isActive = (path) =>
+  const isActive = (path: string) =>
     location.pathname === path
       ? "text-yellow-300 border-b-2 border-yellow-300"
       : "hover:text-yellow-200";
@@ -14,13 +14,10 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-green-800 to-green-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
-        {/* LOGO */}
         <h1 className="text-2xl font-extrabold tracking-wide text-white flex items-center gap-2">
           🌾 <span>KisanMitra</span>
         </h1>
 
-        {/* DESKTOP MENU */}
         <ul className="hidden md:flex items-center space-x-8 text-white font-semibold">
           <li className={`flex items-center gap-2 ${isActive("/")}`}>
             <FaHome />
@@ -40,7 +37,6 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* MOBILE BUTTON */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden text-3xl text-white focus:outline-none"
@@ -49,7 +45,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       <div
         className={`md:hidden transition-all duration-300 ${
           open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
