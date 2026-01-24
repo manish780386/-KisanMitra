@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.input {
+  @apply w-full p-2 border rounded mt-2;
+}
+
+.card {
+  @apply bg-white p-6 shadow rounded text-center font-semibold;
+}
+
+.card-gradient {
+  @apply bg-gradient-to-br from-green-50 to-green-100 p-6 rounded shadow;
+}
+.card-hover {
+  @apply hover:scale-105 transition-transform;
+}
+
