@@ -16,7 +16,7 @@ interface MandiPrice {
 
 // State -> Districts mapping (example, add more states/districts)
 const stateDistricts: Record<string, string[]> = {
-  "Madhya Pradesh": ["Indore", "Bhopal", "Gwalior", "Jabalpur"],
+  "Madhya Pradesh": ["Indore", "Bhopal", "Gwalior", "Jabalpur","Betul","Harda"],
   "Maharashtra": ["Pune", "Mumbai", "Nagpur", "Nashik"],
   "Rajasthan": ["Jaipur", "Udaipur", "Jodhpur"],
   "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra"],
