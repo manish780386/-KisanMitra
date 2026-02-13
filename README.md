@@ -1,137 +1,101 @@
+# 🌾 KisanMitra – Smart Farmer Assistant Platform
 
-🌾 KisanMitra – Smart Farmer Assistant Platform
+KisanMitra is a modern **React + TypeScript** based farming assistant web application that helps farmers access all essential agricultural tools and information in one simple and easy-to-use dashboard.
 
-KisanMitra is a modern React + TypeScript based farming assistant web application that helps farmers with:
+The goal of this project is to **empower farmers with technology**, providing weather updates, crop guidance, market prices, government schemes, and AI support in one place.
 
-🌦️ Weather Forecast
+---
 
-🌱 Crop Advisory
+## 🚀 Features
 
-💰 Mandi Prices
+### 📊 Dashboard
 
-🏛️ Government Schemes
+Central hub to quickly access all farming services.
 
-🛠️ Farm Tools & Equipment
+### 🌦️ Weather Forecast
 
-💬 AI Farmer Chat (ChatGPT based)
+* Live weather data using OpenWeather API
+* Temperature, humidity, wind speed, pressure
+* Sunrise & sunset timings
+* Rain prediction
+* City search + quick access buttons
 
-🌐 Multi-Language Support (Hindi / English)
+### 🌱 Crop Advisory
 
-The goal of this project is to empower farmers with technology by providing all farming tools and information in one simple dashboard.
+* Crop-wise farming guidance
+* Sowing & harvesting periods
+* Irrigation tips
+* Disease alerts
+* Pest control suggestions
+* Market tips
 
-🚀 Features
-📊 Dashboard
+**Supported Crops:**
 
-Central place to access all farming services easily.
+* Wheat
+* Rice
+* Maize
+* Soybean
+* Mustard
 
-🌦️ Weather Forecast
+### 🏛️ Government Schemes
 
-Live weather data using OpenWeather API
+* Latest schemes for farmers
+* Eligibility details
+* Benefits information
+* Official links
+* Search functionality
 
-Temperature, humidity, wind, pressure
+### 🛠️ Farm Tools & Equipment
 
-Sunrise & sunset time
+* Modern agricultural tools showcase
+* Images + descriptions
+* Features list
+* Popup detail view
 
-Rain prediction
+### 💬 Farmer Chat (AI Powered)
 
-City search + quick buttons
+* Ask crop-related questions
+* Chat with AI assistant
+* Future-ready for:
 
-🌱 Crop Advisory
+  * Camera disease detection
+  * Expert consultation
+  * Voice input
 
-Crop-wise farming guidance
+### 🌐 Multi-Language Support
 
-Sowing & harvesting periods
-
-Irrigation tips
-
-Disease alerts
-
-Pest control suggestions
-
-Market tips
-
-Supported crops:
-
-Wheat
-
-Rice
-
-Maize
-
-Soybean
-
-Mustard
-
-🏛️ Government Schemes
-
-List of latest schemes for farmers
-
-Eligibility info
-
-Benefits
-
-Official links
-
-Search functionality
-
-🛠️ Farm Tools & Equipment
-
-Modern agricultural tools showcase
-
-Images + descriptions
-
-Features list
-
-Popup details
-
-💬 Farmer Chat (AI Powered)
-
-Ask crop related questions
-
-Chat with AI assistant
-
-Future ready for:
-
-Camera input (crop disease detection)
-
-Expert consultation
-
-Voice input
-
-🌐 Multi-Language Support
-
-English
-
-Hindi
+* English
+* Hindi
 
 Language can be switched from Navbar.
-All pages update automatically using global Language Context.
+All pages update automatically using **Global Language Context**.
 
-🧑‍💻 Tech Stack
+---
 
-Frontend:
+## 🧑‍💻 Tech Stack
 
-React
+### Frontend
 
-TypeScript (TSX)
+* React
+* TypeScript (TSX)
+* Tailwind CSS
+* React Router
+* React Icons
+* Axios
 
-Tailwind CSS
+### API
 
-React Router
+* OpenWeather API
 
-React Icons
+### State Management
 
-Axios
+* React Context (Language Context)
 
-API:
+---
 
-OpenWeather API
+## 📁 Project Structure
 
-State Management:
-
-React Context (Language Context)
-
-📁 Project Structure
+```
 src/
  ├─ components/
  │   ├─ Navbar.tsx
@@ -150,62 +114,84 @@ src/
  │
  ├─ App.tsx
  ├─ main.tsx
+```
 
+---
 
-⚙️ Installation
-1. Clone repository
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone Repository
+
+```
 git clone <your-repo-url>
 cd kisamitra
+```
 
-2. Install dependencies
+### 2️⃣ Install Dependencies
+
+```
 npm install
+```
 
-3. Run project
+### 3️⃣ Run Development Server
+
+```
 npm run dev
+```
 
+Open in browser:
 
-Open:
-
+```
 http://localhost:5173
+```
 
-🔑 API Setup (Weather)
+---
 
-Create .env file:
+## 🔑 API Setup (Weather)
 
+Create `.env` file in root folder:
+
+```
 VITE_WEATHER_API_KEY=your_api_key_here
+```
 
+Get API key from:
 
-Get key from:
+```
 https://openweathermap.org/api
+```
 
-🌟 Future Improvements
+---
 
-📷 Camera disease detection (AI)
+## 🌟 Future Improvements
 
-🎤 Voice assistant for farmers
+* 📷 AI Crop disease detection using camera
+* 🎤 Voice assistant for farmers
+* 📈 Live mandi prices API
+* 📞 Expert consultation chat
+* 📱 Mobile app (React Native)
+* 🗣️ More regional language support
 
-📈 Live mandi prices API
+---
 
-📞 Expert consultation chat
+## 👨‍💻 Developer
 
-📱 Mobile app version (React Native)
+**Manish Dange**
 
-🗣️ More regional languages
-
-👨‍💻 Developer
-
-Manish Dange
-
-📧 manishdange17@gmail.com
-
-Instagram:
+📧 [manishdange17@gmail.com](mailto:manishdange17@gmail.com)
+📷 Instagram:
 https://www.instagram.com/manish_dange_07/
 
-❤️ Contribution
+---
+
+## ❤️ Contribution
 
 Pull requests are welcome.
-For major changes, please open an issue first.
+For major changes, please open an issue first to discuss what you would like to change.
 
-📜 License
+---
 
-This project is for educational and social good purposes.
+## 📜 License
+
+This project is created for **educational and social good purposes**.
+Feel free to use and improve it for helping farmers.
