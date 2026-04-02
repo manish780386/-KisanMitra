@@ -4,6 +4,7 @@ export type Language = "en" | "hi" | "mr";
 
 interface LanguageContextType {
   lang: Language;
+  language: Language; // alias for backward compatibility
   setLang: (lang: Language) => void;
 }
 
@@ -13,7 +14,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [lang, setLang] = useState<Language>("en");
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang }}>
+    <LanguageContext.Provider value={{ lang, language: lang, setLang }}>
       {children}
     </LanguageContext.Provider>
   );
