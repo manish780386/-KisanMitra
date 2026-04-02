@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaChartLine, FaExclamationTriangle, FaBug, FaSeedling, FaTint, FaSun } from "react-icons/fa";
+import { FaChartLine, FaExclamationTriangle, FaBug, FaSeedling } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 
 interface Disease {

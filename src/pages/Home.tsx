@@ -1,5 +1,5 @@
 import {
-  FaCloudSun, FaSeedling, FaRupeeSign, FaClipboardList,
+  
   FaUsers, FaMobileAlt, FaArrowRight, FaStar, FaLeaf,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";

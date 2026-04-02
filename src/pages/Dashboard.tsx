@@ -1,6 +1,6 @@
 import {
   FaCloudSun, FaSeedling, FaRupeeSign, FaClipboardList, FaComments, FaTractor,
-  FaArrowRight, FaChartLine, FaLeaf,
+  FaArrowRight
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";

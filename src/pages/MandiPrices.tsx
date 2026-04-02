@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaRupeeSign, FaMapMarkerAlt, FaSearch, FaArrowUp, FaArrowDown } from "react-icons/fa";
+import {  FaMapMarkerAlt, FaSearch, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 
 interface MandiPrice {

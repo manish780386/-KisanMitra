@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   FaTemperatureLow, FaTemperatureHigh, FaTint, FaWind,
-  FaTachometerAlt, FaSun, FaMoon, FaEye, FaCloudSun, FaSearch, FaMapMarkerAlt,
+  FaTachometerAlt, FaSun, FaMoon, FaEye, FaSearch, FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 

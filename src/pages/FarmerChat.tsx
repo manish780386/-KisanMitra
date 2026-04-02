@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaCamera, FaPaperPlane, FaRobot, FaUser, FaTrash, FaMicrophone } from "react-icons/fa";
+import { FaCamera, FaPaperPlane, FaUser, FaTrash } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 
 type Message = {
