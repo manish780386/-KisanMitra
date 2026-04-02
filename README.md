@@ -178,7 +178,7 @@ https://openweathermap.org/api
 
 **Manish Dange**
 
-📧 [manishdange17@gmail.com](mailto:manishdange17@gmail.com)
+📧 [dangemanish35@gmail.com](mailto:dangemanish35@gmail.com)
 📷 Instagram:
 https://www.instagram.com/manish_dange_07/
 
