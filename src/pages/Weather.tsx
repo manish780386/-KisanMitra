@@ -18,7 +18,7 @@ interface WeatherData {
   clouds: { all: number; };
 }
 
-const QUICK_CITIES = ["Indore", "Bhopal", "Nagpur", "Pune", "Jaipur", "Lucknow", "Delhi", "Sidhi"];
+const QUICK_CITIES = ["Indore", "Bhopal", "Nagpur", "Pune", "Jaipur", "Lucknow", "Delhi", "Sidhi", "Jabalpur", "Gwalior"];
 
 const getWeatherEmoji = (main: string) => {
   const m = main.toLowerCase();
